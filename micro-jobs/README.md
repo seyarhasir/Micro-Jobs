@@ -1,36 +1,167 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Micro Jobs - Local Job Matching Platform
+
+A modern MVP for connecting local workers with odd jobs and side hustles. Built with Next.js, TypeScript, Tailwind CSS, shadcn/ui, and Firebase.
+
+## Features
+
+### ✅ Implemented
+- **Modern Landing Page** - Beautiful, responsive homepage with clear value proposition
+- **Authentication System** - Login/Register with Firebase Auth and role-based access
+- **Job Listings** - Search, filter, and browse available jobs with real-time updates
+- **Job Details** - Comprehensive job view with application functionality
+- **Job Posting** - Easy-to-use form for employers to post new jobs
+- **User Dashboard** - Personalized dashboard for both workers and employers
+- **Responsive Design** - Mobile-first design that works on all devices
+- **TypeScript** - Full type safety throughout the application
+
+### 🔄 Planned Features
+- **Firebase Integration** - Real database and authentication
+- **Payment System** - Secure payment processing for job fees
+- **Messaging System** - In-app communication between users
+- **Reviews & Ratings** - User feedback system
+- **Advanced Search** - Location-based and skill-based job matching
+- **Mobile App** - React Native companion app
+
+## Tech Stack
+
+- **Frontend**: Next.js 15, TypeScript, Tailwind CSS
+- **UI Components**: shadcn/ui with Radix UI primitives
+- **Backend**: Firebase (Auth, Firestore, Storage)
+- **Icons**: Lucide React
+- **Styling**: Tailwind CSS with custom design system
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+- Node.js 18+ 
+- npm or yarn
+- Firebase project (for production)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+### Installation
+
+1. **Clone and install dependencies:**
+   ```bash
+   cd micro-jobs
+   npm install
+   ```
+
+2. **Set up Firebase (Optional for development):**
+   - Create a Firebase project at [console.firebase.google.com](https://console.firebase.google.com)
+   - Enable Authentication and Firestore Database
+   - Copy your Firebase config and create `.env.local`:
+     ```env
+     NEXT_PUBLIC_FIREBASE_API_KEY=your_api_key_here
+     NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=your_project_id.firebaseapp.com
+     NEXT_PUBLIC_FIREBASE_PROJECT_ID=your_project_id
+     NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=your_project_id.appspot.com
+     NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
+     NEXT_PUBLIC_FIREBASE_APP_ID=your_app_id
+     ```
+
+3. **Run the development server:**
+   ```bash
+   npm run dev
+   ```
+
+4. **Open your browser:**
+   Navigate to [http://localhost:3000](http://localhost:3000)
+
+## Project Structure
+
+```
+src/
+├── app/                    # Next.js app router pages
+│   ├── dashboard/         # User dashboard
+│   ├── jobs/             # Job listings and details
+│   ├── login/            # Authentication pages
+│   ├── register/
+│   └── post-job/         # Job posting form
+├── components/           # Reusable UI components
+│   ├── ui/              # shadcn/ui components
+│   └── Navigation.tsx   # Main navigation
+├── contexts/            # React contexts
+│   └── AuthContext.tsx  # Authentication state
+├── lib/                 # Utilities and configurations
+│   ├── firebase.ts      # Firebase configuration
+│   └── utils.ts         # Helper functions
+└── types/               # TypeScript type definitions
+    └── index.ts         # Application types
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Key Pages
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **`/`** - Landing page with features and CTA
+- **`/jobs`** - Browse and search job listings
+- **`/jobs/[id]`** - Individual job details with application form
+- **`/post-job`** - Form for employers to post new jobs
+- **`/login`** - User authentication
+- **`/register`** - User registration with role selection
+- **`/dashboard`** - Personalized user dashboard
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## User Roles
 
-## Learn More
+### Workers
+- Browse and apply for jobs
+- Track applications and earnings
+- Manage profile and skills
 
-To learn more about Next.js, take a look at the following resources:
+### Employers  
+- Post job listings
+- Review applications
+- Manage job postings
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Development
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Available Scripts
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run start` - Start production server
+- `npm run lint` - Run ESLint
 
-## Deploy on Vercel
+### Adding New Components
+This project uses shadcn/ui for components. To add new components:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+npx shadcn@latest add [component-name]
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Styling Guidelines
+- Use Tailwind CSS classes for styling
+- Follow the established design system
+- Maintain consistent spacing and colors
+- Ensure mobile responsiveness
+
+## Deployment
+
+### Vercel (Recommended)
+1. Push code to GitHub
+2. Connect repository to Vercel
+3. Add environment variables in Vercel dashboard
+4. Deploy automatically on push
+
+### Other Platforms
+The app can be deployed to any platform that supports Next.js:
+- Netlify
+- Railway
+- AWS Amplify
+- Firebase Hosting
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Test thoroughly
+5. Submit a pull request
+
+## License
+
+This project is licensed under the MIT License.
+
+## Support
+
+For questions or support, please open an issue on GitHub or contact the development team.
+
+---
+
+**Built with ❤️ using modern web technologies**
