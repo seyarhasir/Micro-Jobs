@@ -39,20 +39,25 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       setFirebaseUser(firebaseUser);
 
       if (firebaseUser) {
-        // Get user data from Firestore
-        const userDoc = await getDoc(doc(db, "users", firebaseUser.uid));
-        if (userDoc.exists()) {
-          const userData = userDoc.data();
-          setUser({
-            id: firebaseUser.uid,
-            email: firebaseUser.email!,
-            name: userData.name,
-            avatar: userData.avatar,
-            phone: userData.phone,
-            role: userData.role,
-            createdAt: userData.createdAt?.toDate() || new Date(),
-            updatedAt: userData.updatedAt?.toDate() || new Date(),
-          });
+        try {
+          // Get user data from Firestore
+          const userDoc = await getDoc(doc(db, "users", firebaseUser.uid));
+          if (userDoc.exists()) {
+            const userData = userDoc.data();
+            setUser({
+              id: firebaseUser.uid,
+              email: firebaseUser.email!,
+              name: userData.name,
+              avatar: userData.avatar,
+              phone: userData.phone,
+              role: userData.role,
+              createdAt: userData.createdAt?.toDate() || new Date(),
+              updatedAt: userData.updatedAt?.toDate() || new Date(),
+            });
+          }
+        } catch (error) {
+          console.log("Mock Firebase: No user data available");
+          setUser(null);
         }
       } else {
         setUser(null);
@@ -65,7 +70,16 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   const login = async (email: string, password: string) => {
-    await signInWithEmailAndPassword(auth, email, password);
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+    } catch (error: any) {
+      if (error.message.includes("Firebase not configured")) {
+        throw new Error(
+          "Authentication is not available in demo mode. Please set up Firebase to enable login."
+        );
+      }
+      throw error;
+    }
   };
 
   const register = async (
@@ -74,28 +88,47 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     name: string,
     role: "employer" | "worker"
   ) => {
-    const { user: firebaseUser } = await createUserWithEmailAndPassword(
-      auth,
-      email,
-      password
-    );
+    try {
+      const { user: firebaseUser } = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
 
-    await updateProfile(firebaseUser, { displayName: name });
+      await updateProfile(firebaseUser, { displayName: name });
 
-    // Create user document in Firestore
-    const userData = {
-      name,
-      email,
-      role,
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    };
+      // Create user document in Firestore
+      const userData = {
+        name,
+        email,
+        role,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      };
 
-    await setDoc(doc(db, "users", firebaseUser.uid), userData);
+      await setDoc(doc(db, "users", firebaseUser.uid), userData);
+    } catch (error: any) {
+      if (error.message.includes("Firebase not configured")) {
+        throw new Error(
+          "Registration is not available in demo mode. Please set up Firebase to enable registration."
+        );
+      }
+      throw error;
+    }
   };
 
   const logout = async () => {
-    await signOut(auth);
+    try {
+      await signOut(auth);
+    } catch (error: any) {
+      if (error.message.includes("Firebase not configured")) {
+        // Mock logout - just clear the user state
+        setUser(null);
+        setFirebaseUser(null);
+      } else {
+        throw error;
+      }
+    }
   };
 
   const value = {

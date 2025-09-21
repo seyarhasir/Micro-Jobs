@@ -5,6 +5,7 @@ A modern MVP for connecting local workers with odd jobs and side hustles. Built 
 ## Features
 
 ### ✅ Implemented
+
 - **Modern Landing Page** - Beautiful, responsive homepage with clear value proposition
 - **Authentication System** - Login/Register with Firebase Auth and role-based access
 - **Job Listings** - Search, filter, and browse available jobs with real-time updates
@@ -15,6 +16,7 @@ A modern MVP for connecting local workers with odd jobs and side hustles. Built 
 - **TypeScript** - Full type safety throughout the application
 
 ### 🔄 Planned Features
+
 - **Firebase Integration** - Real database and authentication
 - **Payment System** - Secure payment processing for job fees
 - **Messaging System** - In-app communication between users
@@ -33,19 +35,30 @@ A modern MVP for connecting local workers with odd jobs and side hustles. Built 
 ## Getting Started
 
 ### Prerequisites
-- Node.js 18+ 
+
+- Node.js 18+
 - npm or yarn
 - Firebase project (for production)
 
 ### Installation
 
 1. **Clone and install dependencies:**
+
    ```bash
    cd micro-jobs
    npm install
    ```
 
 2. **Set up Firebase (Optional for development):**
+
+   **Demo Mode (No Setup Required):**
+
+   - The app works out of the box with mock data and demo functionality
+   - All features are visible and functional for demonstration purposes
+   - Authentication shows helpful messages about demo mode
+
+   **Production Setup:**
+
    - Create a Firebase project at [console.firebase.google.com](https://console.firebase.google.com)
    - Enable Authentication and Firestore Database
    - Copy your Firebase config and create `.env.local`:
@@ -59,6 +72,7 @@ A modern MVP for connecting local workers with odd jobs and side hustles. Built 
      ```
 
 3. **Run the development server:**
+
    ```bash
    npm run dev
    ```
@@ -101,11 +115,13 @@ src/
 ## User Roles
 
 ### Workers
+
 - Browse and apply for jobs
 - Track applications and earnings
 - Manage profile and skills
 
-### Employers  
+### Employers
+
 - Post job listings
 - Review applications
 - Manage job postings
@@ -113,12 +129,14 @@ src/
 ## Development
 
 ### Available Scripts
+
 - `npm run dev` - Start development server
 - `npm run build` - Build for production
 - `npm run start` - Start production server
 - `npm run lint` - Run ESLint
 
 ### Adding New Components
+
 This project uses shadcn/ui for components. To add new components:
 
 ```bash
@@ -126,6 +144,7 @@ npx shadcn@latest add [component-name]
 ```
 
 ### Styling Guidelines
+
 - Use Tailwind CSS classes for styling
 - Follow the established design system
 - Maintain consistent spacing and colors
@@ -134,13 +153,16 @@ npx shadcn@latest add [component-name]
 ## Deployment
 
 ### Vercel (Recommended)
+
 1. Push code to GitHub
 2. Connect repository to Vercel
 3. Add environment variables in Vercel dashboard
 4. Deploy automatically on push
 
 ### Other Platforms
+
 The app can be deployed to any platform that supports Next.js:
+
 - Netlify
 - Railway
 - AWS Amplify
